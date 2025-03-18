@@ -16,11 +16,36 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    toast({
-      title: 'Message Sent',
-      description: 'Thank you for contacting us. We will get back to you soon.',
-    })
-    setFormData({ name: '', email: '', phone: '', message: '' })
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      
+      const result = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message')
+      }
+      
+      toast({
+        title: 'Message Sent',
+        description: 'Thank you for contacting us. We will get back to you soon.',
+      })
+      
+      setFormData({ name: '', email: '', phone: '', message: '' })
+    } catch (error) {
+      console.error('Error sending message:', error)
+      toast({
+        title: 'Error',
+        description: error instanceof Error ? error.message : 'Failed to send message. Please try again.',
+        variant: 'destructive',
+      })
+    }
   }
 
   const locations = [

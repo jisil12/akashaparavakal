@@ -95,16 +95,17 @@ export default function DonatePage() {
       formData.append('email', donorInfo.email)
       formData.append('isMonthly', donorInfo.isMonthly.toString())
       
-      // Here you would send the form data to your API
-      // const response = await fetch('/api/donations', {
-      //   method: 'POST',
-      //   body: formData
-      // })
+      // Send the form data to our API
+      const response = await fetch('/api/donations', {
+        method: 'POST',
+        body: formData
+      })
       
-      // if (!response.ok) throw new Error('Failed to process donation')
+      const result = await response.json()
       
-      // Simulate API call for now
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to process donation')
+      }
       
       toast({
         title: 'Thank You!',
