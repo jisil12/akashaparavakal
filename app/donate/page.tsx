@@ -307,7 +307,7 @@ export default function DonatePage() {
                 <div className="flex justify-center">
                   <div className="bg-white p-4 rounded-lg">
                     <Image 
-                      src="/gpay-qr.png" 
+                      src="/gpay.png" 
                       alt="Google Pay QR Code" 
                       width={200} 
                       height={200}
