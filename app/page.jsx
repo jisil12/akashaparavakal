@@ -37,7 +37,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center">
       {/* Hero Section */}
       <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-background/95 z-10" />
         <Image
           src="/hero-bdd.jpg"
           alt="Background"
@@ -51,10 +51,10 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="mb-6 text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary">
+            <h1 className="mb-6 text-6xl font-bold text-white drop-shadow-md">
               Welcome to Akasha Paravakal
             </h1>
-            <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="mb-8 text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
               Let us come together in the name of our Lord to make the least the best, The last the first, and The lost the choicest
             </p>
             <div className="flex justify-center gap-6">

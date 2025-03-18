@@ -8,7 +8,7 @@ export default function AboutPage() {
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
       <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-background/95 z-10" />
         <Image
           src="https://images.unsplash.com/photo-1593113630400-ea4288922497?q=80&w=2070&auto=format&fit=crop"
           alt="About Us Hero"
@@ -18,10 +18,10 @@ export default function AboutPage() {
         />
         <div className="container relative z-20 mx-auto px-4 py-16 text-center">
           <FadeInView>
-            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary mb-4">
+            <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-md">
               About Us
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
               Serving humanity with love and compassion since 1983
             </p>
           </FadeInView>
