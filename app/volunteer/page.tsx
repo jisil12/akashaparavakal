@@ -58,6 +58,16 @@ export default function VolunteerPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      // Validate form data
+      if (!formData.name || !formData.email || !formData.role) {
+        toast({
+          title: 'Missing Information',
+          description: 'Please fill in all required fields.',
+          variant: 'destructive',
+        })
+        return
+      }
+      
       const response = await fetch('/api/volunteer', {
         method: 'POST',
         headers: {
@@ -66,8 +76,10 @@ export default function VolunteerPage() {
         body: JSON.stringify(formData),
       })
 
+      const result = await response.json()
+      
       if (!response.ok) {
-        throw new Error('Failed to submit application')
+        throw new Error(result.error || 'Failed to submit application')
       }
 
       toast({
@@ -86,7 +98,7 @@ export default function VolunteerPage() {
       console.error('Error submitting application:', error)
       toast({
         title: 'Error',
-        description: 'Failed to submit application. Please try again.',
+        description: error instanceof Error ? error.message : 'Failed to submit application. Please try again.',
         variant: 'destructive',
       })
     }
