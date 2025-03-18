@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { Toaster } from "@/components/ui/toaster";
 import { MotionContainer } from "@/components/animations/motion-container";
 
 const inter = Inter({ subsets: ['latin'] })
@@ -37,18 +38,19 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen bg-gray-900`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative min-h-screen">
+          <div className="relative flex min-h-screen flex-col">
             <Navigation />
-            <div className="pt-20">
+            <div className="flex-1">
               <MotionContainer>
                 {children}
               </MotionContainer>
             </div>
             <Footer />
+            <Toaster />
           </div>
         </ThemeProvider>
       </body>

@@ -6,27 +6,62 @@ import { motion } from 'framer-motion';
 import { FadeInView, ScaleOnHover } from '@/components/animations/motion-container';
 
 export default function Home() {
+  const locations = [
+    {
+      name: "THIRUMUGHA ASHRAM",
+      subtitle: "PSYCHIATRIC HOME FOR GENTS",
+      address: "No.28, Voderahalli Village, Vidyaranjapura",
+      city: "MS Palya, Bengaluru - 560097",
+      phone: "+91 9886623996",
+      email: "thirumughaashram@gmail.com"
+    },
+    {
+      name: "THRITHWA ASHRAMA",
+      subtitle: "PSYCHIATRIC HOME FOR LADIES",
+      address: "No.6, Bharath Nagar, Ashrama Road,",
+      city: "Tanisandra, Dr. SRK Nagar Post, Bengaluru - 560077",
+      phone: "+91 9886623996",
+      email: "thirumughaashram@gmail.com"
+    },
+    {
+      name: "THRITHWA ELIZABETH MANE",
+      subtitle: "REHABILITATION CENTRE",
+      address: "No.170/1, kalathamanahalli, Byalakere Village",
+      city: "Shivakote P.O, Bengaluru - 560039",
+      phone: "+91 9886623996",
+      email: "thirumughaashram@gmail.com"
+    }
+  ];
+
   return (
-    <main className="flex min-h-screen flex-col items-center pt-10">
+    <main className="flex min-h-screen flex-col items-center">
       {/* Hero Section */}
-      <section className="w-full">
-        <div className="container mx-auto px-4 py-16 text-center">
+      <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
+        <Image
+          src="/hero-bg.jpg"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="container relative z-20 mx-auto px-4 py-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            <h1 className="mb-6 text-5xl font-bold gradient-text">
+            <h1 className="mb-6 text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary">
               Welcome to Akasha Paravakal
             </h1>
             <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
               Let us come together in the name of our Lord to make the least the best, The last the first, and The lost the choicest
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-6">
               <ScaleOnHover>
                 <Link
                   href="/donate"
-                  className="rounded-lg bg-primary px-6 py-3 text-primary-foreground hover:bg-primary/90 transition-colors button-bounce"
+                  className="rounded-full bg-primary px-8 py-4 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-primary/25"
                 >
                   Donate Now
                 </Link>
@@ -34,7 +69,7 @@ export default function Home() {
               <ScaleOnHover>
                 <Link
                   href="/volunteer"
-                  className="rounded-lg border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors button-bounce"
+                  className="rounded-full border-2 border-primary px-8 py-4 text-lg font-medium text-primary hover:bg-primary/10 transition-all duration-300"
                 >
                   Volunteer
                 </Link>
@@ -44,51 +79,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Image Gallery Section */}
-      <section className="w-full py-20">
+      {/* Gallery Section */}
+      <section className="w-full py-20 bg-gradient-to-b from-background to-background/50">
         <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-12">
+            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary">
+              Gallery
+            </h2>
+            <ScaleOnHover>
+              <Link
+                href="/gallery"
+                className="group flex items-center gap-2 text-primary/80 hover:text-primary transition-colors"
+              >
+                View All
+                <svg 
+                  className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </ScaleOnHover>
+          </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {[
-              {
-                src: '/image1.jpg',
-                alt: 'Main Building',
-              },
-              {
-                src: '/image2.jpg',
-                alt: 'Garden Area',
-              },
-              {
-                src: '/image3.jpg',
-                alt: 'Common Area',
-              },
+              { src: '/image1.jpg', alt: 'Main Building' },
+              { src: '/image5.jpg', alt: 'Garden Area' },
+              { src: '/image3.jpg', alt: 'Common Area' },
             ].map((image, index) => (
               <FadeInView key={index}>
-                <div className="overflow-hidden rounded-lg shadow-lg card-hover glass">
-                  <div className="relative h-64 w-full">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover transition-transform duration-300 hover:scale-105"
-                    />
+                <Link href="/gallery" className="block group">
+                  <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                    <div className="relative h-80 w-full">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <p className="text-center text-lg font-semibold">
-                      {image.alt}
-                    </p>
-                  </div>
-                </div>
+                </Link>
               </FadeInView>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="w-full py-20">
+      {/* Services Section */}
+      <section className="w-full py-20 bg-gradient-to-b from-background/50 to-background">
         <div className="container mx-auto px-4">
           <FadeInView>
-            <h2 className="mb-12 text-center text-3xl font-bold gradient-text">
+            <h2 className="mb-12 text-center text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary">
               Our Services
             </h2>
           </FadeInView>
@@ -97,7 +142,7 @@ export default function Home() {
               {
                 icon: (
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="h-8 w-8 text-primary"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -117,7 +162,7 @@ export default function Home() {
               {
                 icon: (
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="h-8 w-8 text-primary"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -137,7 +182,7 @@ export default function Home() {
               {
                 icon: (
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="h-8 w-8 text-primary"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -156,13 +201,13 @@ export default function Home() {
               },
             ].map((feature, index) => (
               <FadeInView key={index}>
-                <div className="rounded-lg p-6 text-center glass card-hover">
-                  <div className="mb-4 flex justify-center">
-                    <div className="rounded-full bg-primary/10 p-3">
+                <div className="group rounded-2xl p-8 text-center bg-white/5 hover:bg-white/10 transition-colors duration-300 border border-primary/10 hover:border-primary/30">
+                  <div className="mb-6 flex justify-center">
+                    <div className="rounded-xl bg-primary/10 p-4 group-hover:bg-primary/20 transition-colors duration-300">
                       {feature.icon}
                     </div>
                   </div>
-                  <h3 className="mb-2 text-xl font-semibold">
+                  <h3 className="mb-4 text-2xl font-semibold text-primary">
                     {feature.title}
                   </h3>
                   <p className="text-muted-foreground">
@@ -171,6 +216,56 @@ export default function Home() {
                 </div>
               </FadeInView>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="w-full py-20 bg-gradient-to-b from-background to-background/90">
+        <div className="container mx-auto px-4">
+          <FadeInView>
+            <h2 className="mb-12 text-center text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary">
+              Our Locations
+            </h2>
+          </FadeInView>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {locations.map((location, index) => (
+              <FadeInView key={index}>
+                <div className="rounded-2xl bg-white/5 p-8 hover:bg-white/10 transition-all duration-300 border border-primary/10 hover:border-primary/30">
+                  <h3 className="mb-2 text-xl font-semibold text-primary">
+                    {location.name}
+                  </h3>
+                  <p className="mb-4 text-sm text-blue-400">
+                    {location.subtitle}
+                  </p>
+                  <div className="space-y-3 text-sm text-muted-foreground">
+                    <p>
+                      {location.address}<br />
+                      {location.city}
+                    </p>
+                    <p>
+                      Phone: {location.phone}
+                    </p>
+                    <p>
+                      Email: {location.email}
+                    </p>
+                  </div>
+                </div>
+              </FadeInView>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <ScaleOnHover>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-primary/25"
+              >
+                Contact Us
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </ScaleOnHover>
           </div>
         </div>
       </section>

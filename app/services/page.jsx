@@ -1,4 +1,7 @@
-import Image from 'next/image'
+'use client';
+
+import Image from 'next/image';
+import { FadeInView } from '@/components/animations/motion-container';
 
 export default function ServicesPage() {
   const services = [
@@ -14,7 +17,7 @@ export default function ServicesPage() {
       ],
       icon: (
         <svg
-          className="h-12 w-12 text-blue-600"
+          className="h-12 w-12 text-primary"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -40,7 +43,7 @@ export default function ServicesPage() {
       ],
       icon: (
         <svg
-          className="h-12 w-12 text-blue-600"
+          className="h-12 w-12 text-primary"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -66,7 +69,7 @@ export default function ServicesPage() {
       ],
       icon: (
         <svg
-          className="h-12 w-12 text-blue-600"
+          className="h-12 w-12 text-primary"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -83,86 +86,106 @@ export default function ServicesPage() {
   ]
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="mb-8 text-4xl font-bold text-gray-900 dark:text-white">
-        Our Services
-      </h1>
-      <p className="mb-12 text-xl text-gray-600 dark:text-gray-300">
-        We provide comprehensive care with Christian values, focusing on uplifting mentally disabled individuals and the homeless through love, support, and holistic care.
-      </p>
-
-      <div className="grid gap-8 md:grid-cols-3">
-        {services.map((service) => (
-          <div
-            key={service.title}
-            className="rounded-lg bg-white p-8 shadow-lg dark:bg-gray-800"
-          >
-            <div className="mb-4">{service.icon}</div>
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
-              {service.title}
-            </h2>
-            <p className="mb-6 text-gray-600 dark:text-gray-300">
-              {service.description}
+    <main className="flex min-h-screen flex-col">
+      {/* Hero Section */}
+      <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
+        <Image
+          src="/services-hero.jpg"
+          alt="Our Services"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="container relative z-20 mx-auto px-4 py-16 text-center">
+          <FadeInView>
+            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary mb-4">
+              Our Services
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              We provide comprehensive care with Christian values, focusing on uplifting mentally disabled individuals and the homeless through love, support, and holistic care.
             </p>
-            <ul className="space-y-2">
-              {service.features.map((feature) => (
-                <li
-                  key={feature}
-                  className="flex items-center text-gray-600 dark:text-gray-300"
-                >
-                  <svg
-                    className="mr-2 h-4 w-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      {/* Facilities */}
-      <section className="mt-16">
-        <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
-          Our Facilities
-        </h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
-            <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
-              Thirumugha Ashram
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Psychiatric Home for Gents located in Voderahalli Village, providing specialized care and support.
-            </p>
-          </div>
-          <div className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
-            <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
-              Thrithwa Ashrama
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Psychiatric Home for Ladies in Bharath Nagar, offering dedicated care in a safe environment.
-            </p>
-          </div>
-          <div className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
-            <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
-              Thrithwa Elizabeth Mane
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Rehabilitation Centre in Byalakere Village, focusing on recovery and reintegration.
-            </p>
-          </div>
+          </FadeInView>
         </div>
       </section>
-    </div>
-  )
+
+      <div className="container mx-auto px-4 py-20">
+        {/* Services Grid */}
+        <div className="grid gap-8 md:grid-cols-3">
+          {services.map((service) => (
+            <FadeInView key={service.title}>
+              <div className="rounded-2xl bg-white/5 p-8 hover:bg-white/10 transition-all duration-300 border border-primary/10 h-full flex flex-col">
+                <div className="rounded-xl bg-primary/10 p-4 w-fit mb-6">
+                  {service.icon}
+                </div>
+                <h2 className="mb-4 text-2xl font-semibold text-primary">
+                  {service.title}
+                </h2>
+                <p className="mb-6 text-muted-foreground flex-grow">
+                  {service.description}
+                </p>
+                <ul className="space-y-3">
+                  {service.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-3 text-muted-foreground"
+                    >
+                      <svg
+                        className="w-5 h-5 text-primary flex-shrink-0 mt-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeInView>
+          ))}
+        </div>
+
+        {/* Facilities */}
+        <section className="mt-20">
+          <FadeInView>
+            <h2 className="mb-12 text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary">
+              Our Facilities
+            </h2>
+            <div className="grid gap-8 md:grid-cols-3">
+              {[
+                {
+                  name: "Thirumugha Ashram",
+                  description: "Psychiatric Home for Gents located in Voderahalli Village, providing specialized care and support."
+                },
+                {
+                  name: "Thrithwa Ashrama",
+                  description: "Psychiatric Home for Ladies in Bharath Nagar, offering dedicated care in a safe environment."
+                },
+                {
+                  name: "Thrithwa Elizabeth Mane",
+                  description: "Rehabilitation Centre in Byalakere Village, focusing on recovery and reintegration."
+                }
+              ].map((facility, index) => (
+                <div key={index} className="rounded-2xl bg-white/5 p-8 hover:bg-white/10 transition-all duration-300 border border-primary/10">
+                  <h3 className="text-2xl font-semibold text-primary mb-4">
+                    {facility.name}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {facility.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </FadeInView>
+        </section>
+      </div>
+    </main>
+  );
 }

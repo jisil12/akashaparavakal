@@ -14,7 +14,6 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
     toast({
       title: 'Message Sent',
       description: 'Thank you for contacting us. We will get back to you soon.',
@@ -22,19 +21,48 @@ export default function ContactPage() {
     setFormData({ name: '', email: '', phone: '', message: '' })
   }
 
+  const locations = [
+    {
+      name: "THIRUMUGHA ASHRAM",
+      subtitle: "PSYCHIATRIC HOME FOR GENTS",
+      address: "No.28, Voderahalli Village, Vidyaranjapura",
+      city: "MS Palya, Bengaluru - 560097",
+      phone: "+91 9886623996",
+      email: "thirumughaashram@gmail.com"
+    },
+    {
+      name: "THRITHWA ASHRAMA",
+      subtitle: "PSYCHIATRIC HOME FOR LADIES",
+      address: "No.6, Bharath Nagar, Ashrama Road,",
+      city: "Tanisandra, Dr. SRK Nagar Post, Bengaluru - 560077",
+      phone: "+91 9886623996",
+      email: "thirumughaashram@gmail.com"
+    },
+    {
+      name: "THRITHWA ELIZABETH MANE",
+      subtitle: "REHABILITATION CENTRE",
+      address: "No.170/1, kalathamanahalli, Byalakere Village",
+      city: "Shivakote P.O, Bengaluru - 560039",
+      phone: "+91 9886623996",
+      email: "thirumughaashram@gmail.com"
+    }
+  ]
+
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="mb-8 text-4xl font-bold text-gray-900 dark:text-white">
+      <h1 className="mb-8 text-4xl font-bold text-center gradient-text">
         Contact Us
       </h1>
 
-      <div className="grid gap-8 md:grid-cols-2">
-        {/* Contact Information */}
-        <div>
-          <div className="rounded-lg bg-white p-8 shadow-lg dark:bg-gray-800">
-            <h2 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-              Get in Touch
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+        {locations.map((location, index) => (
+          <div key={index} className="rounded-lg bg-white p-8 shadow-lg dark:bg-gray-800">
+            <h2 className="mb-2 text-2xl font-semibold text-gray-900 dark:text-white">
+              {location.name}
             </h2>
+            <p className="mb-4 text-sm text-blue-600 dark:text-blue-400">
+              {location.subtitle}
+            </p>
             <div className="space-y-4">
               <div className="flex items-start">
                 <svg
@@ -61,9 +89,8 @@ export default function ContactPage() {
                     Address
                   </h3>
                   <p className="mt-1 text-gray-600 dark:text-gray-300">
-                    123 Main Street
-                    <br />
-                    City, State 12345
+                    {location.address}<br />
+                    {location.city}
                   </p>
                 </div>
               </div>
@@ -87,7 +114,7 @@ export default function ContactPage() {
                     Phone
                   </h3>
                   <p className="mt-1 text-gray-600 dark:text-gray-300">
-                    (123) 456-7890
+                    {location.phone}
                   </p>
                 </div>
               </div>
@@ -111,15 +138,17 @@ export default function ContactPage() {
                     Email
                   </h3>
                   <p className="mt-1 text-gray-600 dark:text-gray-300">
-                    info@akashaparavakal.org
+                    {location.email}
                   </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ))}
+      </div>
 
-        {/* Contact Form */}
+      {/* Contact Form */}
+      <div className="max-w-2xl mx-auto">
         <div className="rounded-lg bg-white p-8 shadow-lg dark:bg-gray-800">
           <h2 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             Send us a Message
@@ -211,4 +240,4 @@ export default function ContactPage() {
       </div>
     </div>
   )
-} 
+}
