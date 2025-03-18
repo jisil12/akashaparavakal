@@ -280,7 +280,7 @@ export default function DonatePage() {
                 />
               </div>
 
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <input
                   type="checkbox"
                   id="monthly"
@@ -297,7 +297,7 @@ export default function DonatePage() {
                 >
                   Make this a monthly donation
                 </label>
-              </div>
+              </div> */}
 
               {/* Payment QR Code */}
               <div className="space-y-4 border border-primary/10 rounded-xl p-6 bg-white/5">
