@@ -39,7 +39,7 @@ export default function Home() {
       <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
         <Image
-          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
+          src="/hero-bdd.jpg"
           alt="Background"
           fill
           className="object-cover"
@@ -259,7 +259,8 @@ export default function Home() {
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-primary/25"
-              >
+
+>
                 Contact Us
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
