@@ -19,6 +19,14 @@ export async function POST(request: Request) {
       );
     }
 
+    // Convert the screenshot to base64 for storage in the database
+    let screenshotBase64 = null;
+    if (screenshot) {
+      const bytes = await screenshot.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      screenshotBase64 = buffer.toString('base64');
+    }
+
     // Create donation record in database
     const donation = await prisma.donation.create({
       data: {
@@ -27,9 +35,8 @@ export async function POST(request: Request) {
         donorEmail: email,
         isMonthly,
         status: 'pending',
-        // We would typically upload the screenshot to a storage service
-        // and store the URL here, but for now we'll just mark it as received
-        message: screenshot ? 'Payment screenshot received' : null,
+        // Store the screenshot as base64 in the message field
+        message: screenshotBase64 ? `data:${screenshot.type};base64,${screenshotBase64}` : null,
       },
     });
 
