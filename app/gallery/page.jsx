@@ -15,6 +15,12 @@ export default function GalleryPage() {
     { src: '/image4.jpg', alt: 'Facility Image' },
     { src: '/image5.jpg', alt: 'Facility Image' },
     { src: '/image6.jpg', alt: 'Facility Image' },
+    { src: '/image7.jpg', alt: 'Facility Image' },
+    { src: '/image8.jpg', alt: 'Facility Image' },
+    { src: '/image9.jpg', alt: 'Facility Image' },
+    { src: '/image10.jpg', alt: 'Facility Image' },
+    { src: '/image11.jpg', alt: 'Facility Image' },
+    { src: '/image12.jpg', alt: 'Facility Image' },
   ];
 
   return (
