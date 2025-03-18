@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import Image from 'next/image'
 import { FadeInView } from '@/components/animations/motion-container'
@@ -61,14 +61,74 @@ export default function DonatePage() {
     email: '',
     isMonthly: false,
   })
+  const [paymentScreenshot, setPaymentScreenshot] = useState<File | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleDonate = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically integrate with Stripe or another payment processor
-    toast({
-      title: 'Thank You!',
-      description: 'Your donation will help make a difference in our residents\' lives.',
-    })
+    
+    if (!paymentScreenshot) {
+      toast({
+        title: 'Payment Verification Required',
+        description: 'Please upload a screenshot of your payment to complete your donation.',
+        variant: 'destructive'
+      })
+      return
+    }
+
+    setIsUploading(true)
+    
+    try {
+      // Create form data to send the file
+      const formData = new FormData()
+      formData.append('screenshot', paymentScreenshot)
+      formData.append('amount', selectedAmount?.toString() || customAmount)
+      formData.append('name', donorInfo.name)
+      formData.append('email', donorInfo.email)
+      formData.append('isMonthly', donorInfo.isMonthly.toString())
+      
+      // Here you would send the form data to your API
+      // const response = await fetch('/api/donations', {
+      //   method: 'POST',
+      //   body: formData
+      // })
+      
+      // if (!response.ok) throw new Error('Failed to process donation')
+      
+      // Simulate API call for now
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      toast({
+        title: 'Thank You!',
+        description: 'Your donation has been received. We will send you a confirmation email shortly.',
+      })
+      
+      // Reset form
+      setSelectedAmount(null)
+      setCustomAmount('')
+      setDonorInfo({
+        name: '',
+        email: '',
+        isMonthly: false,
+      })
+      setPaymentScreenshot(null)
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'There was a problem processing your donation. Please try again.',
+        variant: 'destructive'
+      })
+      console.error(error)
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setPaymentScreenshot(e.target.files[0])
+    }
   }
 
   return (
@@ -155,11 +215,15 @@ export default function DonatePage() {
                     type="number"
                     name="custom-amount"
                     id="custom-amount"
-                    min={1}
+                    min="1"
                     value={customAmount}
                     onChange={(e) => {
-                      setCustomAmount(e.target.value)
-                      setSelectedAmount(null)
+                      const value = e.target.value;
+                      // Only set positive values
+                      if (parseFloat(value) >= 0 || value === '') {
+                        setCustomAmount(value)
+                        setSelectedAmount(null)
+                      }
                     }}
                     className="w-full px-8 py-3 rounded-xl bg-white/5 border border-primary/10 text-muted-foreground focus:border-primary/30 focus:ring-1 focus:ring-primary/30 transition-colors placeholder:text-muted-foreground/50"
                     placeholder="Enter amount"
@@ -228,12 +292,83 @@ export default function DonatePage() {
                 </label>
               </div>
 
+              {/* Payment QR Code */}
+              <div className="space-y-4 border border-primary/10 rounded-xl p-6 bg-white/5">
+                <h3 className="text-lg font-medium text-primary text-center">
+                  Scan to Pay with Google Pay
+                </h3>
+                <div className="flex justify-center">
+                  <div className="bg-white p-4 rounded-lg">
+                    <Image 
+                      src="/gpay-qr.png" 
+                      alt="Google Pay QR Code" 
+                      width={200} 
+                      height={200}
+                      className="mx-auto"
+                    />
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground text-center">
+                  UPI ID: akashaparavakal@okicici
+                </p>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-primary">
+                    Upload Payment Screenshot
+                  </label>
+                  <div className="flex items-center gap-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      ref={fileInputRef}
+                      className="hidden"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="flex-1 rounded-xl bg-white/5 border border-primary/10 px-4 py-3 text-muted-foreground hover:bg-white/10 transition-colors"
+                    >
+                      {paymentScreenshot ? paymentScreenshot.name : 'Choose File'}
+                    </button>
+                    {paymentScreenshot && (
+                      <button
+                        type="button"
+                        onClick={() => setPaymentScreenshot(null)}
+                        className="text-red-400 hover:text-red-500"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  {paymentScreenshot && (
+                    <p className="text-xs text-green-400">
+                      ✓ Screenshot uploaded successfully
+                    </p>
+                  )}
+                </div>
+              </div>
+
               <button
                 type="submit"
-                className="w-full rounded-full bg-primary px-8 py-4 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-primary/25"
+                disabled={isUploading}
+                className="w-full rounded-full bg-primary px-8 py-4 text-lg font-medium text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-primary/25 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Donate ₹{selectedAmount || customAmount || ''}
-                {donorInfo.isMonthly ? ' Monthly' : ''}
+                {isUploading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </span>
+                ) : (
+                  <>
+                    Donate ₹{selectedAmount || customAmount || ''}
+                    {donorInfo.isMonthly ? ' Monthly' : ''}
+                  </>
+                )}
               </button>
             </form>
           </div>
