@@ -155,6 +155,7 @@ export default function DonatePage() {
                     type="number"
                     name="custom-amount"
                     id="custom-amount"
+                    min={1}
                     value={customAmount}
                     onChange={(e) => {
                       setCustomAmount(e.target.value)
