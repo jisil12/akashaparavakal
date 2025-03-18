@@ -145,7 +145,7 @@ export default function DonatePage() {
                   htmlFor="custom-amount"
                   className="text-sm font-medium text-primary"
                 >
-                  Custom Amount
+                  {selectedAmount ? "Selected Amount" : "Custom Amount"}
                 </label>
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
@@ -155,12 +155,14 @@ export default function DonatePage() {
                     type="number"
                     name="custom-amount"
                     id="custom-amount"
-                    value={customAmount}
+                    value={selectedAmount || customAmount}
                     onChange={(e) => {
                       setCustomAmount(e.target.value)
                       setSelectedAmount(null)
                     }}
-                    className="w-full px-8 py-3 rounded-xl bg-white/5 border border-primary/10 text-muted-foreground focus:border-primary/30 focus:ring-1 focus:ring-primary/30 transition-colors placeholder:text-muted-foreground/50"
+                    className={`w-full px-8 py-3 rounded-xl bg-white/5 border ${
+                      selectedAmount ? "border-primary/30" : "border-primary/10"
+                    } text-muted-foreground focus:border-primary/30 focus:ring-1 focus:ring-primary/30 transition-colors placeholder:text-muted-foreground/50`}
                     placeholder="Enter amount"
                   />
                 </div>
