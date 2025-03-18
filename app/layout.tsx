@@ -43,7 +43,7 @@ export default function RootLayout({
         >
           <div className="relative min-h-screen">
             <Navigation />
-            <div className="pt-16">
+            <div className="pt-20">
               <MotionContainer>
                 {children}
               </MotionContainer>

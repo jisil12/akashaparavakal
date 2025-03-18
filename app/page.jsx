@@ -7,7 +7,7 @@ import { FadeInView, ScaleOnHover } from '@/components/animations/motion-contain
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center">
+    <main className="flex min-h-screen flex-col items-center pt-10">
       {/* Hero Section */}
       <section className="w-full">
         <div className="container mx-auto px-4 py-16 text-center">
