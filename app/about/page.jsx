@@ -10,7 +10,7 @@ export default function AboutPage() {
       <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
         <Image
-          src="/about-hero.jpg"
+          src="https://images.unsplash.com/photo-1593113630400-ea4288922497?q=80&w=2070&auto=format&fit=crop"
           alt="About Us Hero"
           fill
           className="object-cover"

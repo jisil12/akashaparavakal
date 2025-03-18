@@ -56,7 +56,7 @@ export default function ContactPage() {
       <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
         <Image
-          src="/contact-hero.jpg"
+          src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?q=80&w=2070&auto=format&fit=crop"
           alt="Contact Us"
           fill
           className="object-cover"

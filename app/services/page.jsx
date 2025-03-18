@@ -91,7 +91,7 @@ export default function ServicesPage() {
       <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
         <Image
-          src="/services-hero.jpg"
+          src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop"
           alt="Our Services"
           fill
           className="object-cover"

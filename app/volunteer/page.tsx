@@ -98,7 +98,7 @@ export default function VolunteerPage() {
       <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background/95 z-10" />
         <Image
-          src="/volunteer-hero.jpg"
+          src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=2070&auto=format&fit=crop"
           alt="Volunteer With Us"
           fill
           className="object-cover"
