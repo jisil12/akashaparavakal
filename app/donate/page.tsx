@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import Image from 'next/image'
 import { FadeInView } from '@/components/animations/motion-container'
@@ -56,6 +56,13 @@ export default function DonatePage() {
   const { toast } = useToast()
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null)
   const [customAmount, setCustomAmount] = useState('')
+  
+  // Update customAmount when selectedAmount changes
+  useEffect(() => {
+    if (selectedAmount) {
+      setCustomAmount(selectedAmount.toString())
+    }
+  }, [selectedAmount])
   const [donorInfo, setDonorInfo] = useState({
     name: '',
     email: '',
@@ -300,7 +307,7 @@ export default function DonatePage() {
                 <div className="flex justify-center">
                   <div className="bg-white p-4 rounded-lg">
                     <Image 
-                      src="/gpay.png" 
+                      src="/gpay-qr.png" 
                       alt="Google Pay QR Code" 
                       width={200} 
                       height={200}
