@@ -1,0 +1,179 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { FadeInView, ScaleOnHover } from '@/components/animations/motion-container';
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center">
+      {/* Hero Section */}
+      <section className="w-full">
+        <div className="container mx-auto px-4 py-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="mb-6 text-5xl font-bold gradient-text">
+              Welcome to Akasha Paravakal
+            </h1>
+            <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
+              Let us come together in the name of our Lord to make the least the best, The last the first, and The lost the choicest
+            </p>
+            <div className="flex justify-center gap-4">
+              <ScaleOnHover>
+                <Link
+                  href="/donate"
+                  className="rounded-lg bg-primary px-6 py-3 text-primary-foreground hover:bg-primary/90 transition-colors button-bounce"
+                >
+                  Donate Now
+                </Link>
+              </ScaleOnHover>
+              <ScaleOnHover>
+                <Link
+                  href="/volunteer"
+                  className="rounded-lg border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors button-bounce"
+                >
+                  Volunteer
+                </Link>
+              </ScaleOnHover>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Image Gallery Section */}
+      <section className="w-full py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {[
+              {
+                src: '/image1.jpg',
+                alt: 'Main Building',
+              },
+              {
+                src: '/image2.jpg',
+                alt: 'Garden Area',
+              },
+              {
+                src: '/image3.jpg',
+                alt: 'Common Area',
+              },
+            ].map((image, index) => (
+              <FadeInView key={index}>
+                <div className="overflow-hidden rounded-lg shadow-lg card-hover glass">
+                  <div className="relative h-64 w-full">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-center text-lg font-semibold">
+                      {image.alt}
+                    </p>
+                  </div>
+                </div>
+              </FadeInView>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="w-full py-20">
+        <div className="container mx-auto px-4">
+          <FadeInView>
+            <h2 className="mb-12 text-center text-3xl font-bold gradient-text">
+              Our Services
+            </h2>
+          </FadeInView>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {[
+              {
+                icon: (
+                  <svg
+                    className="h-6 w-6 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                ),
+                title: "Psychiatric Care",
+                description:
+                  "Professional psychiatric treatment and daily care for those who require special attention",
+              },
+              {
+                icon: (
+                  <svg
+                    className="h-6 w-6 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                    />
+                  </svg>
+                ),
+                title: "Family Environment",
+                description:
+                  "A loving community where every member experiences the warmth of family through 'appa' and 'amma' figures",
+              },
+              {
+                icon: (
+                  <svg
+                    className="h-6 w-6 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                    />
+                  </svg>
+                ),
+                title: "Holistic Care",
+                description:
+                  "Complete support including accommodation, medical care, grooming, and spiritual guidance",
+              },
+            ].map((feature, index) => (
+              <FadeInView key={index}>
+                <div className="rounded-lg p-6 text-center glass card-hover">
+                  <div className="mb-4 flex justify-center">
+                    <div className="rounded-full bg-primary/10 p-3">
+                      {feature.icon}
+                    </div>
+                  </div>
+                  <h3 className="mb-2 text-xl font-semibold">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              </FadeInView>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

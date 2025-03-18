@@ -1,21 +1,262 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Import Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
+/* Custom Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 210 50% 98%;
+  --foreground: 220 40% 20%;
+  --card: 210 50% 98%;
+  --card-foreground: 220 40% 20%;
+  --popover: 210 50% 98%;
+  --popover-foreground: 220 40% 20%;
+  --primary: 210 95% 60%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 20% 92%;
+  --secondary-foreground: 220 10% 40%;
+  --muted: 210 20% 92%;
+  --muted-foreground: 220 5% 45%;
+  --accent: 210 95% 60%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 20% 92%;
+  --border: 210 20% 90%;
+  --input: 210 20% 90%;
+  --ring: 210 95% 60%;
+  --radius: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: 220 40% 15%;
+  --foreground: 210 20% 92%;
+  --card: 220 40% 15%;
+  --card-foreground: 210 20% 92%;
+  --popover: 220 40% 15%;
+  --popover-foreground: 210 20% 92%;
+  --primary: 210 95% 60%;
+  --primary-foreground: 220 40% 15%;
+  --secondary: 220 30% 20%;
+  --secondary-foreground: 210 20% 92%;
+  --muted: 220 30% 20%;
+  --muted-foreground: 210 10% 80%;
+  --accent: 210 95% 60%;
+  --accent-foreground: 220 40% 15%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 20% 92%;
+  --border: 220 30% 20%;
+  --input: 220 30% 20%;
+  --ring: 210 95% 60%;
+}
+
+/* Base Styles */
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Custom Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, hsl(var(--primary)), hsl(210 95% 70%));
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: all 300ms;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Animations */
+.button-bounce {
+  transition: transform 150ms;
+}
+.button-bounce:active {
+  transform: scale(0.95);
+}
+
+/* Section Transitions */
+.section-fade-up {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: all 700ms;
+}
+
+.section-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Styles */
+.prose {
+  max-width: none;
+}
+
+.prose a {
+  color: hsl(var(--primary));
+}
+.prose a:hover {
+  color: hsl(var(--primary) / 0.8);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: hsl(var(--foreground));
+  scroll-margin-top: 5rem;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  color: hsl(var(--muted-foreground));
+}
+
+.prose code {
+  color: hsl(var(--primary));
+}
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose pre {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+}
+
+.prose blockquote {
+  border-left: 4px solid hsl(var(--primary));
+  background-color: hsl(var(--accent) / 0.1);
+}
+
+.prose blockquote p {
+  color: hsl(var(--foreground));
+}
+
+/* Form Styles */
+.form-input,
+.form-textarea,
+.form-select,
+.form-multiselect {
+  border-radius: calc(var(--radius) - 2px);
+  border-color: hsl(var(--border));
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus,
+.form-multiselect:focus {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.3);
+}
+
+.form-checkbox,
+.form-radio {
+  color: hsl(var(--primary));
+}
+.form-checkbox:focus,
+.form-radio:focus {
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.3);
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: colors 150ms;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.3);
+}
+
+.btn:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.btn-primary:hover {
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.btn-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+.btn-secondary:hover {
+  background-color: hsl(var(--secondary) / 0.8);
+}
+
+.btn-outline {
+  border: 1px solid hsl(var(--border));
+  background-color: transparent;
+  color: hsl(var(--foreground));
+}
+.btn-outline:hover {
+  background-color: hsl(var(--accent) / 0.1);
+}
+
+/* Card Styles */
+.card {
+  border-radius: var(--radius);
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+/* Navigation Styles */
+.nav-link {
+  color: hsl(var(--muted-foreground));
+}
+.nav-link:hover {
+  color: hsl(var(--foreground));
+}
+
+.nav-link-active {
+  font-weight: 500;
+  color: hsl(var(--primary));
 }
